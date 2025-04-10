@@ -60,4 +60,4 @@ jobs:
             -var 'password=${{ secrets.MYSQL_PASSWORD }}' \
             -no-color \
             -input=false \
-            -detailed-exitcode \
+            -detailed-exitcode
