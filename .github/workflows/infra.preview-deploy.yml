@@ -2,16 +2,16 @@ name: "Infra Preview Deploy"
 
 on:
   push:
-      branches:
-      - main
-      paths:
-      - 10_infra/**
-      - .github/workflows/infra.preview-deploy.yml
+    branches:
+    - main
+    paths:
+    - 10_infra/**
+    - .github/workflows/infra.preview-deploy.yml
   workflow_dispatch:
 
-  permissions:
-    contents: read
-    id-token: write
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   preview:
