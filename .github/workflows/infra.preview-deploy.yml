@@ -37,6 +37,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.TF_VERSION }}
+          terraform_wrapper: false
       - name: Terraform format
         run: |
           terraform fmt -check
@@ -60,4 +61,4 @@ jobs:
             -var 'password=${{ secrets.MYSQL_PASSWORD }}' \
             -no-color \
             -input=false \
-            -detailed-exitcode || echo "exitcode=$?" >> $GITHUB_OUTPUT
+            -detailed-exitcode
