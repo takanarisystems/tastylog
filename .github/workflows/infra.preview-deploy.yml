@@ -38,6 +38,7 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
           terraform_wrapper: false
+          #wrapperを使用することで、planのdetailed-exitcodeを使用できるようになる
       - name: Terraform format
         run: |
           terraform fmt -check
