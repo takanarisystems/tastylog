@@ -1,0 +1,39 @@
+name: "z Slack Notify"
+
+on:
+  workflow_dispatch:
+   
+job:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Notify
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          channel-id: "C08MVSL001Z"
+          payload: |
+            {
+              "attachments": [
+                {
+                  "blocks": [
+                    {
+                      "type": "header",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Message Header",
+                        "emoji": true
+                      }
+                    },
+                    {
+                      "type": "section",
+                      "text": {
+                        "type": "mrkdwn",
+                        "text": "Hello World :ghost:"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
