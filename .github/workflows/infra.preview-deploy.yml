@@ -6,7 +6,7 @@ on:
       - main
       paths:
       - 10_infra/**
-      - .github/workflows/infra.preview-deploy.yml
+      - .github/workflows/**
   workflow_dispatch:
 
 permissions:
