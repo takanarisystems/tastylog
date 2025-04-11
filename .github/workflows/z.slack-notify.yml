@@ -5,6 +5,7 @@ on:
    
 jobs:
   notify:
+    name: Slack Notify
     runs-on: ubuntu-latest
     steps:
       - name: Slack Notify
@@ -35,5 +36,5 @@ jobs:
                 }
               ]
             }
-    env:
-     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
