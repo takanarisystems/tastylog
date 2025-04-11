@@ -5,17 +5,15 @@ on:
    
 jobs:
   notify:
+    name: Slack Notify
     runs-on: ubuntu-latest
     steps:
       - name: Slack Notify
-        uses: slackapi/slack-github-action@v2.0.0
+        uses: slackapi/slack-github-action@v1.22.0
         with:
-          # v2.0.0では webhook または token が必要
-          token: ${{ secrets.SLACK_BOT_TOKEN }}
-          # channel-idはここでは使えないので、payloadの中で指定
+          channel-id: "C08MVSL001Z"
           payload: |
             {
-              "channel": "C08MVSL001Z",
               "attachments": [
                 {
                   "blocks": [
@@ -38,3 +36,5 @@ jobs:
                 }
               ]
             }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
