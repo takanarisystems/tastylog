@@ -1,4 +1,4 @@
-name: "Slack Notify" # Notify on Slack
+name: "Slack Notify"
 
 on:
   workflow_dispatch:
