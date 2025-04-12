@@ -103,6 +103,7 @@ jobs:
     if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
     #planのdetailed-exitcodeが2のときのみ実行する
     environment: production
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
