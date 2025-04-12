@@ -65,13 +65,14 @@ jobs:
             -no-color \
             -input=false \
             -detailed-exitcode
+          echo "exitcode=$?" >> $GITHUB_OUTPUT
           # echo "TF_PLAN_EXITCODE=$?" >> $GITHUB_ENV
           # echo "exitcode=$?" >> $GITHUB_ENV
           # echo "::set-output name=exitcode::$?"
 
 
       - name: Slack notify
-        if: steps.plan.outputs.TF_PLAN_EXITCODE == '2' #planのdetailed-exitcodeが2のときのみ実行する
+        if: steps.plan.outputs.exitcode == '2' #planのdetailed-exitcodeが2のときのみ実行する
         uses: slackapi/slack-github-action@v1.22.0
         with:
           channel-id: "C08MVSL001Z"
