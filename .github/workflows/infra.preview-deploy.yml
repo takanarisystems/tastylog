@@ -62,14 +62,13 @@ jobs:
           terraform plan \
             -var 'project=${{ env.TF_PROJECT }}' \
             -var 'environment=${{ env.TF_ENVIROMENT }}' \
-            -var 'username=${{ secrets.MYSQL_USERNNAME }}' \
+            -var 'username=${{ secrets.MYSQL_USERNAME }}' \
             -var 'password=${{ secrets.MYSQL_PASSWORD }}' \
             -no-color \
             -input=false \
             -detailed-exitcode
         #Slack通知
       - name: Slack notify
-      - name: Slack Notify
         uses: slackapi/slack-github-action@v1.22.0
         with:
           channel-id: "C08MVSL001Z"
