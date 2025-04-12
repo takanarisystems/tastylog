@@ -70,9 +70,15 @@ jobs:
           # echo "exitcode=$?" >> $GITHUB_ENV
           # echo "::set-output name=exitcode::$?"
 
+      - name: Debug plan exit code
+        if: always()
+        run: |
+          echo "Plan exit code is: ${{ steps.plan.outputs.exitcode }}"
+
+
 
       - name: Slack notify
-        #if: ${{ always() && steps.plan.outputs.exitcode == '2' }} #planのdetailed-exitcodeが2のときのみ実行する
+        if: ${{ always() && steps.plan.outputs.exitcode == '2' }} #planのdetailed-exitcodeが2のときのみ実行する
         uses: slackapi/slack-github-action@v1.22.0
         with:
           channel-id: "C08MVSL001Z"
