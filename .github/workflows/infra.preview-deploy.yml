@@ -17,7 +17,8 @@ env:
   AWS_REGION: ap-northeast-1
   TF_VERSION: 1.2.8
   TF_PROJECT: tastylog
-  TF_ENVIROMENT: dry-run
+  TF_ENVIROMENT: dev #環境名を指定する。variables.tfvarsに記載している環境名と一致させること。
+  #環境名一致しないと、terraform planでエラーになる。deploy時に全てリセットとなる。
 
 defaults:
   run:
