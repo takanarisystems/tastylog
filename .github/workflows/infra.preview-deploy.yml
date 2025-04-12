@@ -67,21 +67,6 @@ jobs:
             -detailed-exitcode
           #echo "exitcode=$?" >> $GITHUB_OUTPUT
 
-      #- name: Debug exit code
-        #run: |
-          #echo "Terraform plan exit code: ${{ steps.plan.outputs.exitcode }}"
-      # 重要：デバッグ用に変更があるかどうかを確認
-      # - name: Set has changes
-      #   id: set_changes
-      #   run: |
-      #     if [ "${{ steps.plan.outputs.exitcode }}" == "2" ]; then
-      #       echo "HAS_CHANGES=true" >> $GITHUB_OUTPUT
-      #     else
-      #       echo "HAS_CHANGES=false" >> $GITHUB_OUTPUT
-      #     fi
-      #     echo "Has changes: $([ "${{ steps.plan.outputs.exitcode }}" == "2" ] && echo 'YES' || echo 'NO')"
-
-        #Slack通知
       - name: Slack notify
         uses: slackapi/slack-github-action@v1.22.0
         with:
@@ -113,8 +98,7 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
   deploy:
-    name: "Deploy"
-    runs-on: ubuntu-latest
+    name: Deploy
     needs: preview
     if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
     #planのdetailed-exitcodeが2のときのみ実行する
