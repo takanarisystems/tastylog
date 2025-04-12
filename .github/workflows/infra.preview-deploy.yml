@@ -84,7 +84,9 @@ jobs:
           fi
           ############
           # exit codeをGitHub Actionsの出力に設定
-          echo "exitcode=$?" >> $GITHUB_OUTPUT
+          #code=$?後のif文で終了コード0を取得しているので、以下は取得できなくなる。
+          #echo "exitcode=$?" >> $GITHUB_OUTPUT
+          echo "exitcode=$code" >> $GITHUB_OUTPUT
 
       - name: Debug plan exit code #デバッグ用
         # if: always() #常に実行する
