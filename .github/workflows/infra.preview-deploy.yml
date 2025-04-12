@@ -29,7 +29,8 @@ jobs:
     name: "Preview"
     runs-on: ubuntu-latest
     outputs:
-      TF_PLAN_EXITCODE: ${{ steps.plan.outputs.exitcode }}
+      # TF_PLAN_EXITCODE: ${{ steps.plan.outputs.exitcode }}
+      TF_PLAN_EXITCODE: ${{ env.exitcode }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -37,8 +38,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.TF_VERSION }}
-          terraform_wrapper: false
-          #wrapperを使用することで、planのdetailed-exitcodeを使用できるようになる
+          terraform_wrapper: false  #wrapperを使用することで、planのdetailed-exitcodeを使用できるようになる
       - name: Terraform format
         run: |
           terraform fmt -check
@@ -65,7 +65,9 @@ jobs:
             -no-color \
             -input=false \
             -detailed-exitcode
-          echo "exitcode=$?" >> $GITHUB_OUTPUT
+          # echo "TF_PLAN_EXITCODE=$?" >> $GITHUB_ENV
+          echo "exitcode=$?" >> $GITHUB_ENV
+
 
       - name: Slack notify
         uses: slackapi/slack-github-action@v1.22.0
@@ -100,8 +102,7 @@ jobs:
   deploy:
     name: "Deploy"
     needs: preview
-    if: needs.preview.outputs.TF_PLAN_EXITCODE == '2'
-    #planのdetailed-exitcodeが2のときのみ実行する
+    if: needs.preview.outputs.TF_PLAN_EXITCODE == '2' #planのdetailed-exitcodeが2のときのみ実行する
     environment: production
     runs-on: ubuntu-latest
     steps:
@@ -111,8 +112,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.TF_VERSION }}
-          terraform_wrapper: false
-          #wrapperを使用することで、planのdetailed-exitcodeを使用できるようになる
+          terraform_wrapper: false  #wrapperを使用することで、planのdetailed-exitcodeを使用できるようになる
       - name: Terraform format
         run: |
           terraform fmt -check
