@@ -98,7 +98,7 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
   deploy:
-    name: Deploy
+    name: "Deploy"
     needs: preview
     if: needs.preview.outputs.TF_PLAN_EXITCODE == 2
     #planのdetailed-exitcodeが2のときのみ実行する
