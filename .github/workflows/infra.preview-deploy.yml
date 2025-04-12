@@ -65,11 +65,11 @@ jobs:
             -no-color \
             -input=false \
             -detailed-exitcode
-          echo "exitcode=$?" >> $GITHUB_OUTPUT
+          #echo "exitcode=$?" >> $GITHUB_OUTPUT
 
-      - name: Debug exit code
-        run: |
-          echo "Terraform plan exit code: ${{ steps.plan.outputs.exitcode }}"
+      #- name: Debug exit code
+        #run: |
+          #echo "Terraform plan exit code: ${{ steps.plan.outputs.exitcode }}"
 
         #Slack通知
       - name: Slack notify
