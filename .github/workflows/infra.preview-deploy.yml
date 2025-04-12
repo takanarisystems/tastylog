@@ -31,8 +31,6 @@ jobs:
     outputs:
       TF_PLAN_EXITCODE: ${{ steps.plan.outputs.exitcode }}
     steps:
-      # - run: |
-      #     echo "Hello world!"
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup terraform
@@ -52,7 +50,7 @@ jobs:
       - name: Terraform init
         run: |
           terraform init -no-color
-      - name: Terraform vailidate
+      - name: Terraform validate
         run: |
           terraform validate -no-color
       - name: Terraform plan
@@ -67,6 +65,8 @@ jobs:
             -no-color \
             -input=false \
             -detailed-exitcode
+          echo "exitcode=$?" >> $GITHUB_OUTPUT
+          
         #Slack通知
       - name: Slack notify
         uses: slackapi/slack-github-action@v1.22.0
