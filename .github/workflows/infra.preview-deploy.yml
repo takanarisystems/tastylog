@@ -78,7 +78,8 @@ jobs:
             echo "Terraform plan failed with exit code 1. Stopping script."
             exit 1
           elif [ $code -eq 2 ]; then
-            echo "Terraform plan succeeded with exit code 2 (changes present). Continuing script."
+            #echo "Terraform plan succeeded with exit code 2 (changes present). Continuing script."
+            echo "::error::Terraform plan found changes (exit code 2). Approval required."
           elif [ $code -eq 0 ]; then
             echo "Terraform plan finished with exit code 0 (no changes). Skipping further steps."
           fi
