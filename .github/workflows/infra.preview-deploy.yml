@@ -53,7 +53,7 @@ jobs:
         run: |
           terraform validate -no-color
       - name: Terraform plan
-        continue-on-error: true # planのdetailed-exitcodeを使用するために、continue-on-errorをtrueにする
+        continue-on-error: true #planのdetailed-exitcodeを使用するために、continue-on-errorをtrueにする
         id: plan
         run: |  
           set +e # シェルレベルで途中終了させないように設定。つまりエラーの無視。
