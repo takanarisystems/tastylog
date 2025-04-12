@@ -29,8 +29,8 @@ jobs:
     name: "Preview"
     runs-on: ubuntu-latest
     outputs:
-      # TF_PLAN_EXITCODE: ${{ steps.plan.outputs.exitcode }}
-      TF_PLAN_EXITCODE: ${{ env.exitcode }}
+      TF_PLAN_EXITCODE: ${{ steps.plan.outputs.exitcode }}
+      # TF_PLAN_EXITCODE: ${{ env.exitcode }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -66,10 +66,12 @@ jobs:
             -input=false \
             -detailed-exitcode
           # echo "TF_PLAN_EXITCODE=$?" >> $GITHUB_ENV
-          echo "exitcode=$?" >> $GITHUB_ENV
+          # echo "exitcode=$?" >> $GITHUB_ENV
+          # echo "::set-output name=exitcode::$?"
 
 
       - name: Slack notify
+        if: steps.plan.outputs.exitcode == 2 #planのdetailed-exitcodeが2のときのみ実行する
         uses: slackapi/slack-github-action@v1.22.0
         with:
           channel-id: "C08MVSL001Z"
@@ -102,7 +104,7 @@ jobs:
   deploy:
     name: "Deploy"
     needs: preview
-    if: needs.preview.outputs.TF_PLAN_EXITCODE == '2' #planのdetailed-exitcodeが2のときのみ実行する
+    if: needs.preview.outputs.TF_PLAN_EXITCODE == 2 #planのdetailed-exitcodeが2のときのみ実行する
     environment: production
     runs-on: ubuntu-latest
     steps:
