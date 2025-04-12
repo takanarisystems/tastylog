@@ -66,10 +66,10 @@ jobs:
             -input=false \
             -detailed-exitcode
           echo "exitcode=$?" >> $GITHUB_OUTPUT
-          
-          # terraform planのexitcodeを取得するために、$GITHUB_OUTPUTに書き込む
+
       - name: Debug exit code
-        run: echo "Terraform plan exit code: ${{ steps.plan.outputs.exitcode }}"
+        run: |
+          echo "Terraform plan exit code: ${{ steps.plan.outputs.exitcode }}"
 
         #Slack通知
       - name: Slack notify
